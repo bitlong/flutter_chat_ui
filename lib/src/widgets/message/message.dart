@@ -372,7 +372,7 @@ class Message extends StatelessWidget {
               maxWidth: messageWidth.toDouble(),
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 GestureDetector(
                   onDoubleTap: () => onMessageDoubleTap?.call(context, message),
@@ -404,6 +404,7 @@ class Message extends StatelessWidget {
             ),
           ),
           if (currentUserIsAuthor && !isLeftStatus) _statusIcon(context),
+          if (currentUserIsAuthor && showUserAvatars) _avatarBuilder(),
         ],
       ),
     );

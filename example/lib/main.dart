@@ -37,7 +37,10 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   List<types.Message> _messages = [];
   final _user = const types.User(
-    id: '82091008-a484-4a89-ae75-a22bf8d6f3ac',
+    id: '2',
+    firstName: 'Bean',
+    lastName: 'Long',
+    imageUrl: 'https://picx.zhimg.com/b524be134d0987c0d939d67b18fbd705_l.jpg?source=32738c0c',
   );
 
   @override
@@ -212,7 +215,7 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   void _loadMessages() async {
-    final response = await rootBundle.loadString('assets/messages.json');
+    final response = await rootBundle.loadString('assets/messages2.json');
     final messages = (jsonDecode(response) as List)
         .map((e) => types.Message.fromJson(e as Map<String, dynamic>))
         .toList();
