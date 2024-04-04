@@ -11,6 +11,7 @@ class UserAvatar extends StatelessWidget {
   const UserAvatar({
     super.key,
     required this.author,
+    required this.currentUserIsAuthor,
     this.bubbleRtlAlignment,
     this.imageHeaders,
     this.onAvatarTap,
@@ -18,6 +19,8 @@ class UserAvatar extends StatelessWidget {
 
   /// Author to show image and name initials from.
   final types.User author;
+
+  final bool currentUserIsAuthor;
 
   /// See [Message.bubbleRtlAlignment].
   final BubbleRtlAlignment? bubbleRtlAlignment;
@@ -40,7 +43,8 @@ class UserAvatar extends StatelessWidget {
     return Container(
       margin: bubbleRtlAlignment == BubbleRtlAlignment.left
           ? const EdgeInsetsDirectional.only(end: 8)
-          : const EdgeInsets.only(right: 8),
+          : const EdgeInsets.only(right: 4, left: 4),
+
       child: GestureDetector(
         onTap: () => onAvatarTap?.call(author),
         child: CircleAvatar(

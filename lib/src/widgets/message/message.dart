@@ -190,10 +190,11 @@ class Message extends StatelessWidget {
   final Widget Function(types.VideoMessage, {required int messageWidth})?
       videoMessageBuilder;
 
-  Widget _avatarBuilder() => showAvatar
+  Widget _avatarBuilder(bool currentUserIsAuthor) => showAvatar
       ? avatarBuilder?.call(message.author) ??
           UserAvatar(
             author: message.author,
+            currentUserIsAuthor: currentUserIsAuthor,
             bubbleRtlAlignment: bubbleRtlAlignment,
             imageHeaders: imageHeaders,
             onAvatarTap: onAvatarTap,
@@ -351,12 +352,12 @@ class Message extends StatelessWidget {
           ? EdgeInsetsDirectional.only(
               bottom: 4,
               end: isMobile ? query.padding.right : 0,
-              start: 20 + (isMobile ? query.padding.left : 0),
+              start: 10 + (isMobile ? query.padding.left : 0),
             )
           : EdgeInsets.only(
               bottom: 4,
-              left: 20 + (isMobile ? query.padding.left : 0),
-              right: isMobile ? query.padding.right : 0,
+              left: 10 + (isMobile ? query.padding.left : 0),
+              right: 10 + (isMobile ? query.padding.right : 0),
             ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -365,7 +366,7 @@ class Message extends StatelessWidget {
             ? null
             : TextDirection.ltr,
         children: [
-          if (!currentUserIsAuthor && showUserAvatars) _avatarBuilder(),
+          if (!currentUserIsAuthor && showUserAvatars) _avatarBuilder(currentUserIsAuthor),
           if (currentUserIsAuthor && isLeftStatus) _statusIcon(context),
           ConstrainedBox(
             constraints: BoxConstraints(
@@ -404,7 +405,7 @@ class Message extends StatelessWidget {
             ),
           ),
           if (currentUserIsAuthor && !isLeftStatus) _statusIcon(context),
-          if (currentUserIsAuthor && showUserAvatars) _avatarBuilder(),
+          if (currentUserIsAuthor && showUserAvatars) _avatarBuilder(currentUserIsAuthor),
         ],
       ),
     );
